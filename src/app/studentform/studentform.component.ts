@@ -35,7 +35,7 @@ export class StudentformComponent {
       mobileNumber: [''],
       postalAddress: [''],
       employeeID: [],
-      gender: [1],
+      gender: [],
       country: [''],
       city: [''],
       designation: [],
@@ -183,7 +183,8 @@ getemployeeedit(id:any){
           username: this.studentData.username,
           password: this.studentData.password
         });
-        console.log('Student Data:', this.studentData);
+     
+        console.log('Type of Gender from API:', typeof this.studentData.gender);
       }
     },
     (error) => {

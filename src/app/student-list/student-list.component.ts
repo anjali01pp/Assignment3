@@ -173,8 +173,8 @@ export class StudentListComponent  {
   }
   handleDeleteConfirmation(confirmed: boolean) {
     if (confirmed) {
-      // Handle student deletion here
-      this.DeleteEmployeeid(this.studentToDelete); // Replace 'id' with your student ID property
+      
+      this.DeleteEmployeeid(this.studentToDelete); 
     }
     this.confirmationDialogVisible = false;
   }

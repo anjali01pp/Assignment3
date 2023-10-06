@@ -4,12 +4,12 @@
         <a class="navbar-brand " href="#">Student Portal</a>
       </div>
       <ul class="nav navbar-nav ">
-        <li class="active" (click)="Getallstudents()"><a >Students</a></li>
+        <li class="active" style="cursor:pointer;"><a (click)="Getallstudents()">Students</a></li>
        
       </ul>
       <ul class="nav navbar-nav navbar-right ">
-        <li ><a routerLink="/studentform"><span class="glyphicon glyphicon-user " ></span> Add Student</a></li>
-        <li ><a routerLink="/auth"><span class="glyphicon glyphicon-log-in "></span> Login</a></li>
+        <li ><a routerLink="/studentform" style="cursor:pointer;"><span class="glyphicon glyphicon-user " ></span> Add Student</a></li>
+        <li ><a routerLink="/auth" style="cursor:pointer;"><span class="glyphicon glyphicon-log-in "></span> Login</a></li>
       </ul>
     </div>
   </nav>

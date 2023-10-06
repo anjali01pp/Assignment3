@@ -12,12 +12,13 @@ import { Router } from '@angular/router';
 })
 
 export class HeaderComponent {
-  constructor(private router :Router,private studentform:StudentListComponent){
+  constructor(private router :Router,private studentform:StudentListComponent,private studentsform:StudentListComponent){
    
    
   
   }
   Getallstudents(){
    this.studentform.getEmployeeData();
+   this.router.navigate(['/student-list']);
    }
 }

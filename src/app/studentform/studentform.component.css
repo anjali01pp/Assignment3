@@ -25,9 +25,7 @@ body {
   padding:20px 0;
   border-bottom:1px solid #cccccc;
 }
-/*---------------------------------------*/
-/* Form Body */
-/*---------------------------------------*/
+
 .form-body {
     padding:10px 40px;
     color:#666;
@@ -92,15 +90,11 @@ body {
    color:#d9d9d9;
   }
   
-  /*---------------------------------------*/
-  /* Form Footer */
-  /*---------------------------------------*/
+ 
   .form-footer {
    clear:both;
   }
-  /*---------------------------------------*/
-/* Form Footer */
-/*---------------------------------------*/
+ 
 .signup-form .form-footer  {
     background-color: #EFF0F1;
     border-bottom-left-radius: 10px;
