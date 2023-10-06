@@ -1,0 +1,138 @@
+<app-header></app-header>
+
+<div class="container">
+  <h5 style="display:flex;justify-content: flex-end;margin-bottom:30px;color:blue;" (click)="getEmployeeData()">Show All({{employeecount}})</h5>
+  <div class="row">
+      <div *ngFor="let student of students">
+          <div class=" col-md-3 col-lg-3">
+      <div class="student"  [class.flipped]="flipState[student.employeeID]" (mouseenter)="onMouseEn(student)" (mouseleave)="onMouseLeave(student)">
+       
+  
+    <div class="cardList" *ngIf="!flipState[student.employeeID]">
+      <h5 class="right"> <a (click)="showDeleteConfirmation(student.employeeID)" style="color: red;position: relative;cursor: pointer; display: flex; left:100px;"><span class="glyphicon glyphicon-trash"></span></a></h5>
+      
+      <div class=" bg-transparent text-center">
+          <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
+          <h4 style="color:rgba(33, 72, 117, 0.966);
+        ">{{student.firstName}} {{student.lastName}}</h4>
+        </div>
+        <div class="card-body">
+          <p class="mb-0" *ngIf="student.gender == 1"><strong class="pr-1" >Gender:</strong> <i class="fa fa-male" style="padding:10px;font-size: 20px;"></i>Male</p>
+          <p class="mb-0" *ngIf="student.gender == 2"><strong class="pr-1" >Gender:</strong><i class="fa fa-female" style="padding:10px;font-size: 20px;"></i>Female</p>
+          <p class="mb-0" *ngIf="student.designation == 1"><strong class="pr-1">Designation:</strong> Software Enginner</p>
+          <p class="mb-0" *ngIf="student.designation == 2"><strong class="pr-1">Designation:</strong> Software Tester</p>
+          <p class="mb-0" *ngIf="student.designation == 3"><strong class="pr-1">Designation:</strong> Data Analyst</p>
+          <p class="mb-0"><strong class="pr-1">Mobile Number:</strong> {{student.mobileNumber}}</p>
+          <p class="mb-0"><strong class="pr-1">Email:</strong> {{student.personalEmail}}</p>
+
+          <h5 class="right"> <a (click)="Editemployee(student.employeeID)" style="color: rgb(235, 10, 10);position: relative;cursor: pointer; display: flex; left:175px;">Edit</a></h5>
+        </div>
+    </div>
+    <div class="cardDetail" *ngIf="flipState[student.employeeID]">
+      <div class=" bg-transparent text-center">
+          <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
+          <h3>{{student.firstName}} {{student.lastName}}</h3>
+        </div>
+        <div class="card-body">
+          <p class="mb-0"><strong class="pr-1">Postal Address:</strong>{{student.postalAddress}}</p>
+        
+          <p class="mb-0" *ngIf="student.country == 1"><strong class="pr-1">Country:</strong> USA</p>
+          <p class="mb-0" *ngIf="student.country == 2"><strong class="pr-1">Country:</strong> Canada</p>
+          <p class="mb-0" *ngIf="student.country == 3"><strong class="pr-1">Country:</strong> UK</p>
+       
+          <p class="mb-0" *ngIf="student.city == 1"><strong class="pr-1">City:</strong> New york</p>
+          <p class="mb-0" *ngIf="student.city == 2"><strong class="pr-1">City:</strong> Los Angeles</p>
+          <p class="mb-0" *ngIf="student.city == 3"><strong class="pr-1">City:</strong> London</p>
+          <p class="mb-0"><strong class="pr-1">Date of Birth:</strong>{{student.dateOfBirth}}</p>
+        </div>
+    </div>
+    </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>{{ currentPage }} / {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+<!--  
+    <div>
+    <button (click)="Addemployee()">Add</button>
+</div>
+<div class="container">
+    <div class="row">
+        <div *ngFor="let student of students">
+            <div *ngFor="let studentin of student">
+            <div class="col-xs-4">
+        <div class="student"  [class.flipped]="flipState[studentin.name]" (mouseenter)="onMouseEn(studentin)" (mouseleave)="onMouseLeave(studentin)">
+    <div ><button (click)="Editemployee()">Edit </button></div>
+      <div class="cardList" *ngIf="!flipState[studentin.name]">
+        <div class=" bg-transparent text-center">
+            <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
+            <h3>{{studentin.name}}</h3>
+          </div>
+          <div class="card-body">
+            <p class="mb-0"><strong class="pr-1">Student ID:</strong>{{studentin.name}}</p>
+            <p class="mb-0"><strong class="pr-1">Class:</strong>4</p>
+            <p class="mb-0"><strong class="pr-1">Section:</strong>A</p>
+          </div>
+      </div>
+      <div class="cardDetail" *ngIf="flipState[studentin.name]">
+        <div class=" bg-transparent text-center">
+            <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
+            <h3>flipppppp</h3>
+          </div>
+          <div class="card-body">
+            <p class="mb-0"><strong class="pr-1">Student ID:</strong>321000001</p>
+            <p class="mb-0"><strong class="pr-1">Class:</strong>4</p>
+            <p class="mb-0"><strong class="pr-1">Section:</strong>A</p>
+          </div>
+      </div>
+      </div>
+      </div>
+    </div>
+    </div>
+    </div>  -->
+    
+    
+
+<!-- 
+    <div class="container">
+      <div class="row">
+          <div *ngFor="let student of students">
+              <div class="col-xs-3">
+          <div class="student"  [class.flipped]="flipState[student.name]" (mouseenter)="onMouseEn(student)" (mouseleave)="onMouseLeave(student)">
+      
+        <div class="cardList" *ngIf="!flipState[student.name]">
+          <div class=" bg-transparent text-center">
+              <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
+              <h3>{{student.name}}</h3>
+            </div>
+            <div class="card-body">
+              <p class="mb-0"><strong class="pr-1">Student ID:</strong>321000001</p>
+              <p class="mb-0"><strong class="pr-1">Class:</strong>4</p>
+              <p class="mb-0"><strong class="pr-1">Section:</strong>A</p>
+            </div>
+        </div>
+        <div class="cardDetail" *ngIf="flipState[student.name]">
+          <div class=" bg-transparent text-center">
+              <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
+              <h3>flipppppp</h3>
+            </div>
+            <div class="card-body">
+              <p class="mb-0"><strong class="pr-1">Student ID:</strong>321000001</p>
+              <p class="mb-0"><strong class="pr-1">Class:</strong>4</p>
+              <p class="mb-0"><strong class="pr-1">Section:</strong>A</p>
+            </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      </div>
+      </div> -->
+      <app-deletepopup
+      *ngIf="confirmationDialogVisible"
+      [message]="confirmationMessage"
+      (confirmed)="handleDeleteConfirmation($event)"
+    ></app-deletepopup>

@@ -1,0 +1,82 @@
+<!-- <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <div class="alert alert-danger" *ngIf="error">
+        <p>{{ error }}</p>
+      </div>
+    
+      <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" >
+        <div class="form-group">
+          <label for="email">E-Mail</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            ngModel
+            name="email"
+            required
+            email
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            ngModel
+            name="password"
+            required
+            minlength="6"
+          />
+        </div>
+        <div>
+          <button
+            class="btn btn-primary"
+            type="submit"
+          
+          >
+          Login
+          </button>
+          
+         
+        </div>
+      </form>
+    </div>
+  </div> -->
+  <div *ngIf="successMessage" class="alert alert-success mt-3">
+    {{ successMessage }}
+  </div>
+  <div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+</div>
+<form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+    <h3>Student Login</h3>
+
+    <label for="username">Username</label>
+    <input type="text" placeholder="Username" id="username"  class="form-control"
+    ngModel
+    name="username"
+    required
+    username>
+
+    <label for="password">Password</label>
+    <input
+            type="password"
+            id="password"
+            class="form-control"
+            ngModel
+            name="password"
+            required
+            minlength="6"
+          />
+
+    <button type="submit" style="color:black;">Login</button>
+   
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+      {{ errorMessage }}
+    </div>
+    </form>
+    
+  
+  

@@ -1,0 +1,10 @@
+.background{
+    background-color :rgba(33, 72, 117, 0.966);
+    color:#fff;
+}
+a{
+    color:#fff;
+}
+li a:hover{
+    background-color :rgba(84, 126, 204, 0.966);
+}
