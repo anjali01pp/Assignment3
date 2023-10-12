@@ -30,7 +30,7 @@
     </div>
     <div class="cardDetail" *ngIf="flipState[student.employeeID]">
       <div class=" bg-transparent text-center">
-          <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
+         
           <h3>{{student.firstName}} {{student.lastName}}</h3>
         </div>
         <div class="card-body">
@@ -43,7 +43,7 @@
           <p class="mb-0" *ngIf="student.city == 1"><strong class="pr-1">City:</strong> New york</p>
           <p class="mb-0" *ngIf="student.city == 2"><strong class="pr-1">City:</strong> Los Angeles</p>
           <p class="mb-0" *ngIf="student.city == 3"><strong class="pr-1">City:</strong> London</p>
-          <p class="mb-0"><strong class="pr-1">Date of Birth:</strong>{{student.dateOfBirth}}</p>
+          <p class="mb-0"><strong class="pr-1">Date of Birth:</strong>{{student.dateOfBirth | date}}</p>
         </div>
     </div>
     </div>

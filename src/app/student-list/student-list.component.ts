@@ -52,6 +52,7 @@ export class StudentListComponent  {
          this.students=this.students.concat(data);
        
         console.log( this.students)
+        
      
       },
       (error) => {
