@@ -19,12 +19,13 @@ export class StudentformComponent {
   studentForm!: FormGroup;
   studentFormput!: FormGroup;
  studentData:any;
+ showSuccessMessage :any;
  successMessage: string = '';
   errorMessage: string = '';
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.employeeid  = params['id']; 
-      
+      console.log( this.employeeid);
     });
   this.getemployeeedit(this.employeeid );
     this.studentForm = this.formBuilder.group({
@@ -43,8 +44,9 @@ export class StudentformComponent {
       needTransportation: [false],
       notes: [''],
       username: ['', Validators.required],
-      // password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)]]
-      password: ['', Validators.required]
+      //  password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)]]
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required]
     });
    
     // this.studentFormput = this.formBuilder.group({
@@ -83,7 +85,6 @@ export class StudentformComponent {
 onSubmit() {
   if (this.studentForm.valid) {
     const id = this.employeeid;
-  
     
   const token = this.authservice.getToken();
   
@@ -102,10 +103,11 @@ onSubmit() {
     this.http.post('http://ztraining.zeronetraining.local/api.publish/api/employee', formData, { headers }).subscribe(
       (response) => {
         if(response){
-        this.successMessage = 'Successfully Submitted the data!';
-        this.errorMessage = ''; 
+          this.successMessage = 'Successfully Submitted the data!';
+          this.errorMessage = ''; 
+          this.showSuccessMessage = true;
         setTimeout(() => {
-          this.successMessage = '';
+          this.showSuccessMessage = false;
         }, 3000);
         this.studentForm.reset();
 
@@ -132,11 +134,13 @@ else {
   this.http.put(url, formData, { headers }).subscribe(
     (response) => {
       if(response){
-        this.successMessage = 'Successfully Submitted the data!';
+        this.successMessage = 'Successfully updated the data!';
         this.errorMessage = ''; 
+        this.showSuccessMessage = true;
         setTimeout(() => {
-          this.successMessage = '';
-        }, 10000);
+       
+          this.showSuccessMessage = false;
+        }, 3000);
         this.studentForm.reset();
 
         console.log(response);
@@ -150,6 +154,18 @@ else {
 }
 }
 }
+passwordMismatch() {
+  const passwordControl = this.studentForm.get('password');
+  const confirmPasswordControl = this.studentForm.get('confirmPassword');
+
+  if (passwordControl && confirmPasswordControl) {
+    return passwordControl.value !== confirmPasswordControl.value && confirmPasswordControl.dirty;
+  }
+
+  return false;
+}
+
+
 getemployeeedit(id:any){
  
   const token = this.authservice.getToken();
@@ -181,7 +197,7 @@ getemployeeedit(id:any){
           needTransportation: this.studentData.needTransportation,
           notes: this.studentData.notes,
           username: this.studentData.username,
-          password: this.studentData.password
+          password: ""
         });
      
         console.log('Type of Gender from API:', typeof this.studentData.gender);

@@ -127,3 +127,14 @@ body {
     background-color: #169c7b;
     color:white;
   }
+
+.success-message {
+  background-color: #4CAF50; 
+  color: #fff; 
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}

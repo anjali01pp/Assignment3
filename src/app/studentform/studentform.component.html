@@ -1,11 +1,13 @@
 <app-header></app-header>
 <form class="signup-form" [formGroup]="studentForm" (ngSubmit)="onSubmit()">
    
-    <div class="form-header">
+    <div *ngIf="employeeid === undefined" class="form-header">
       <h1>Create Account</h1>
     </div>
 
-   
+    <div *ngIf="employeeid !== ''&&  employeeid !== undefined" class="form-header">
+      <h1>Edit Account</h1>
+    </div>
     <div class="form-body">
       <div class="horizontal-group">
         <div class="form-group left">
@@ -42,21 +44,25 @@
 
 </div>
 <div class="horizontal-group">
-
+<!-- 
   <div class="form-group ">
       
       <label for="postalAddress" class="label-title">Postal Address:</label>
-      <input type="text" id="postalAddress" class="form-input"  formControlName="postalAddress">
-  </div>
+      <textarea type="text-area" id="postalAddress" class="form-input"  formControlName="postalAddress">
+  </div> -->
+  <div class="form-group ">
+    <label for="postalAddress" class="label-title">Postal Address:</label>
+    <textarea id="postalAddress" formControlName="postalAddress" rows="4" cols="20" style="height:auto" class="form-input"></textarea>
 
-  <div class="form-group right">
+</div>
+  <div class="form-group right" style="padding-top:5px;">
       
       <label for="gender" class="label-title">Gender:</label>
       <div>
-        <label>
+        <label style="margin-right:5px;">
           <input type="radio" [value]="1" formControlName="gender"> Male
         </label>
-        <label>
+        <label style="margin-right:5px;">
           <input type="radio" [value]="2" formControlName="gender"> Female
         </label>
        
@@ -77,7 +83,7 @@
      
       </select>
   </div>
-  <div class="form-group right" >
+  <div class="form-group right" style="padding-top: 2px;">
     <label for="city" class="label-title">City:</label>
       <select id="city" formControlName="city" class="form-input">
         <option value="1">New York</option>
@@ -107,8 +113,8 @@
 <div class="horizontal-group">
 
   <div class="form-group left" >
-    <label for="needTransportation" class="label-title">Need Transportation: </label>
-      <input type="checkbox" id="needTransportation" formControlName="needTransportation" >
+    <label for="needTransportation" class="label-title" style="margin-right:5px;">Need Transportation: </label>
+      <input   type="checkbox" id="needTransportation" formControlName="needTransportation" >
   </div>
   
   <div class="form-group ">
@@ -120,15 +126,38 @@
   <label for="username" class="label-title">Username:</label>
   <input type="text" id="username" formControlName="username" class="form-input">
 </div>
-<div class="form-group right">
+<!-- <div class="form-group right">
   <label for="password" class="label-title">Password:</label>
       <input type="password" id="password" formControlName="password" class="form-input">
 </div>
+<div class="form-group left">
+  <label for="confirmPassword"  class="label-title">Confirm Password:</label>
+  <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-input" >
+  {{errorMessage}}
+</div> -->
+<div class="form-group right">
+  <label for="password" class="label-title">Password</label>
+  <input type="password" id="password" name="password" formControlName="password" class="form-input" required>
+</div>
+
+<div class="form-group left">
+  <label for="confirmPassword" class="label-title">Confirm Password</label>
+  <input type="password" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword" class="form-input" required>
+  <div *ngIf="passwordMismatch()">
+    <div class="text-danger">Password and Confirm Password do not match.</div>
+  </div>
+</div>
+
+
+
     </div>
   </div> 
+
     <div class="form-footer">
-     
-      <button type="submit" class="btn" type="submit" [disabled]="!studentForm.valid">Submit</button>
+      <div *ngIf="showSuccessMessage" class="success-message">
+        {{successMessage}}
+      </div>
+      <button type="submit" class="btn" type="submit" [disabled]=" passwordMismatch() || !studentForm.valid">Submit</button>
     </div>
   </form>
   

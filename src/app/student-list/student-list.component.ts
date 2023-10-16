@@ -24,6 +24,9 @@ export class StudentListComponent  {
   confirmationDialogVisible = false;
   confirmationMessage = '';
   studentToDelete!: any;
+  showSuccessMessage:any;
+  successMessage:any;
+  deletedemploeeid:any;
   constructor(private http:HttpClient,private datalayer:DatalayerService,private authservice:AuthService,private router :Router,private studentform:StudentformComponent,private cdr: ChangeDetectorRef){
  
    
@@ -88,14 +91,60 @@ export class StudentListComponent  {
    
   }
 
+  DeleteEmployeeid(id:any){
+    const token = this.authservice.getToken();
+   const iD = id;
+    const url=  `http://ztraining.zeronetraining.local/api.publish/api/employee/${iD} `;
+   
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    this.http.get(url, { headers }).subscribe(
+    (response) => {
+  
+      this.http.delete(url, { headers }).subscribe(
+        (Response) => {
+          this.students = [];
+          this.fetchEmployeeData();
+          localStorage.setItem('deletedEmployeeId', id);
+          console.log(this.students);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+      (error) => {
+    
+       console.log (error);
+      }
+    );
+  }
  Addemployee(){
   this.router.navigate(['/studentform']);
  }
  Editemployee(id:any){
+  
+
+
+  
+const deletedEmployeeId = localStorage.getItem('deletedEmployeeId');
+
+if (deletedEmployeeId) {
+
+  alert(`Employee (ID: ${deletedEmployeeId}) no longer exists in the database.`);
+ 
+  localStorage.removeItem('deletedEmployeeId');
+  
+  this.router.navigate(['/studentform']);
+}
+
+else{
+
   this.router.navigate(['/studentform', id]);
   this.studentform.getemployeeedit(id);
     
-  
+}
   }
  
   fetchEmployeeData(): void {
@@ -144,28 +193,6 @@ export class StudentListComponent  {
 
  
 
-  DeleteEmployeeid(id:any){
-    const token = this.authservice.getToken();
-   const iD = id;
-    const url=  `http://ztraining.zeronetraining.local/api.publish/api/employee/${iD} `;
-   
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-  
-    this.http.delete(url , { headers }).subscribe(
-      (Response) => {
-        this.students = [];
-        this.fetchEmployeeData();
-        console.log( this.students)
-     
-      },
-      (error) => {
-    
-       console.log (error);
-      }
-    );
-  }
 
   showDeleteConfirmation(id: any) {
     this.studentToDelete = id;
@@ -178,6 +205,14 @@ export class StudentListComponent  {
       this.DeleteEmployeeid(this.studentToDelete); 
     }
     this.confirmationDialogVisible = false;
+    this.successMessage = 'Successfully deleted the data!';
+   
+    this.showSuccessMessage = true;
+  setTimeout(() => {
+    this.showSuccessMessage = false;
+  }, 5000);
+  
+    
   }
 
   cancelDelete() {
